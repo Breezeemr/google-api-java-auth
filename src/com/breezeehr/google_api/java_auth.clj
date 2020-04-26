@@ -11,7 +11,20 @@
 (defn application-default-credentials []
   (GoogleCredentials/getApplicationDefault))
 
+(defn init-client [config]
+  (cond-> config
+          (nil? (:credential config))
+          (assoc :credential (application-default-credentials))))
+
+
+(defn add-auth [req client]
+  (assoc-in
+    req
+    [:headers "Authorization"]
+    (str "Bearer "
+         (get-oauth-token (:credential client)))))
+
+
 (comment
   (def client {:credential (application-default-credentials)})
   (get-oauth-token (:credential client)))
-
