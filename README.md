@@ -2,6 +2,15 @@
 
 Uses google java api to authenticate for clojure google api library
 
+## in order to authenticate with this library
+
+you must have a `.config/gcloud/application_default_credentials.json`
+
+    $ gcloud auth application-default login
+	
+to create
+
+
 ## Usage
 
 Build a deployable jar of this library:
