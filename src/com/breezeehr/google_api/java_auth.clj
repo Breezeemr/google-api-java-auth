@@ -1,4 +1,5 @@
 (ns com.breezeehr.google-api.java-auth
+  (:require [clojure.java.io :as io])
   (:import [com.google.auth.oauth2 GoogleCredentials AccessToken]))
 
 (defn ^AccessToken get-access-token [^GoogleCredentials cred]
@@ -10,6 +11,9 @@
 
 (defn application-default-credentials []
   (GoogleCredentials/getApplicationDefault))
+
+(defn service-account-credentials [f]
+  (GoogleCredentials/fromStream (io/input-stream f)))
 
 (defn init-client [config]
   (cond-> config
